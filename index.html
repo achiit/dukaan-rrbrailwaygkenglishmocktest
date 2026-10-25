@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RRB Railway GK Mock Test - English</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#172033}.top{background:#173b6c;color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}.top h1{font-size:18px;margin:0}.timer{font-size:18px;font-weight:bold;background:#0e2a4f;padding:8px 12px;border-radius:6px}.wrap{display:grid;grid-template-columns:1fr 300px;gap:18px;max-width:1200px;margin:18px auto;padding:0 14px}.card{background:#fff;border:1px solid #d9e0ea;border-radius:8px;box-shadow:0 2px 8px #0001}.qhead{padding:14px 18px;border-bottom:1px solid #e4e8ef;display:flex;justify-content:space-between;font-weight:bold}.qbody{padding:22px}.question{font-size:18px;line-height:1.5;margin-bottom:20px}.opt{display:block;border:1px solid #ccd5e1;border-radius:7px;padding:12px;margin:10px 0;cursor:pointer}.opt:hover{background:#f3f7fc}.opt input{margin-right:10px}.actions{padding:14px 18px;border-top:1px solid #e4e8ef;display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;padding:11px 15px;border-radius:6px;font-weight:bold;cursor:pointer}.primary{background:#1967d2;color:white}.review{background:#7b4bb7;color:white}.clear{background:#e9edf3}.submit{background:#16854b;color:white;width:100%;margin-top:12px}.side{padding:16px}.legend{font-size:13px;line-height:1.8;margin-bottom:12px}.dot{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px}.palette{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.num{height:38px;border:0;border-radius:5px;cursor:pointer;background:#e6e9ee}.num.answered{background:#18864b;color:white}.num.reviewed{background:#7c4dba;color:white}.num.current{outline:3px solid #f2a900}.result{max-width:1000px;margin:20px auto;background:white;padding:24px;border-radius:8px}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.stat{background:#f2f5f9;padding:15px;text-align:center;border-radius:7px}.reviewItem{padding:16px 0;border-bottom:1px solid #ddd}.correct{color:#16854b}.wrong{color:#c62828}@media(max-width:800px){.wrap{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="exam">
+<div class="top"><h1>RRB Railway General Knowledge Mock Test — English</h1><div class="timer" id="timer">30:00</div></div>
+<div class="wrap">
+<div class="card"><div class="qhead"><span id="qnum"></span><span>+1 | −0.33</span></div><div class="qbody"><div class="question" id="question"></div><div id="options"></div></div><div class="actions"><button class="btn clear" onclick="prev()">Previous</button><button class="btn clear" onclick="clearAns()">Clear Response</button><button class="btn review" onclick="markReview()">Mark for Review</button><button class="btn primary" onclick="saveNext()">Save & Next</button></div></div>
+<div class="card side"><b>Question Palette</b><div class="legend"><span class="dot" style="background:#18864b"></span>Answered &nbsp; <span class="dot" style="background:#7c4dba"></span>Review &nbsp; <span class="dot" style="background:#e6e9ee"></span>Not Answered</div><div class="palette" id="palette"></div><button class="btn submit" onclick="submitTest()">Submit Test</button></div>
+</div></div><div id="result" style="display:none"></div>
+<script>
+const Q=[
+["In which year did India's first passenger train run?",["1848","1853","1875","1880"],1,"India's first passenger train ran on 16 April 1853 between Bori Bunder and Thane."],
+["What was the route of India's first passenger train?",["Delhi–Agra","Bori Bunder (Mumbai)–Thane","Howrah–Delhi","Chennai–Mysore"],1,"The first passenger train ran from Bori Bunder (Mumbai) to Thane."],
+["Which company operated India's first passenger train?",["Great Indian Peninsula Railway","East Indian Railway","Madras Railway","Bombay Baroda Railway"],0,"The first train was operated by the Great Indian Peninsula Railway."],
+["Which Governor-General strongly promoted railway development in British India?",["Lord Ripon","Lord Dalhousie","Lord Curzon","Lord Canning"],1,"Lord Dalhousie is strongly associated with the development of railways in British India."],
+["Where did India's first metro railway begin?",["Delhi","Mumbai","Kolkata","Chennai"],2,"Kolkata Metro began commercial service in 1984."],
+["In which year did the first Rajdhani Express begin service?",["1965","1967","1969","1972"],2,"The first Rajdhani Express began service in 1969."],
+["The first Vande Bharat Express service ran between which cities?",["New Delhi–Varanasi","Mumbai–Ahmedabad","Chennai–Bengaluru","Delhi–Bhopal"],0,"The first Vande Bharat service began in 2019 between New Delhi and Varanasi."],
+["Maitree Express connects India with which country?",["Nepal","Bangladesh","Myanmar","Bhutan"],1,"Maitree Express connects India and Bangladesh."],
+["Deccan Queen runs between which cities?",["Mumbai–Pune","Delhi–Jaipur","Chennai–Mysore","Kolkata–Patna"],0,"Deccan Queen is associated with the Mumbai–Pune route."],
+["Chenab Rail Bridge is built over which river?",["Jhelum","Chenab","Sutlej","Ravi"],1,"Chenab Rail Bridge is over the Chenab River in Jammu & Kashmir."],
+["Which is India's first cable-stayed railway bridge?",["Pamban Bridge","Anji Khad Bridge","Chenab Bridge","Bogibeel Bridge"],1,"Anji Khad Bridge is India's first cable-stayed railway bridge."],
+["Victoria Terminus is now known as:",["Mumbai Central","Chhatrapati Shivaji Maharaj Terminus (CSMT)","Dadar","Churchgate"],1,"Victoria Terminus is now Chhatrapati Shivaji Maharaj Terminus (CSMT)."],
+["Where is the National Rail Museum located?",["Mumbai","New Delhi","Chennai","Jaipur"],1,"The National Rail Museum is in New Delhi."],
+["What is the width of Indian Broad Gauge?",["1,000 mm","1,435 mm","1,676 mm","1,000 cm"],2,"Indian Broad Gauge is 1,676 mm."],
+["What is a fishplate used for in railways?",["Joining a rail to a sleeper","Joining the ends of two rails","Joining coaches","Operating signals"],1,"A fishplate joins the ends of two rails in a conventional rail joint."],
+["What does EMU stand for?",["Electric Main Unit","Electric Multiple Unit","Engine Motor Unit","Electronic Metro Unit"],1,"EMU stands for Electric Multiple Unit."],
+["What is the standard overhead traction supply on most electrified Indian mainlines?",["11 kV AC","25 kV AC","2.5 kV DC","110 V DC"],1,"Most electrified mainline routes use 25 kV AC overhead traction supply."],
+["PNR stands for:",["Passenger Number Record","Passenger Name Record","Public Name Register","Passenger Network Route"],1,"PNR means Passenger Name Record."],
+["RAC stands for:",["Railway Approved Coach","Reservation Against Cancellation","Reserved All Coaches","Route Allocation Code"],1,"RAC means Reservation Against Cancellation."],
+["Where is RDSO headquartered?",["New Delhi","Lucknow","Mumbai","Pune"],1,"RDSO is headquartered in Lucknow."],
+["Which organisation develops and maintains railway IT systems?",["CRIS","CLW","RCF","ICF"],0,"CRIS is the Centre for Railway Information Systems."],
+["Where is Integral Coach Factory (ICF) located?",["Kapurthala","Perambur, Chennai","Chittaranjan","Varanasi"],1,"ICF is located at Perambur, Chennai."],
+["Where is Rail Coach Factory (RCF) located?",["Kapurthala","Lucknow","Jaipur","Bilaspur"],0,"RCF is located at Kapurthala, Punjab."],
+["Chittaranjan Locomotive Works (CLW) is in which state?",["Punjab","West Bengal","Tamil Nadu","Uttar Pradesh"],1,"CLW is located in West Bengal."],
+["Where is Banaras Locomotive Works (BLW) located?",["Patiala","Varanasi","Bengaluru","Perambur"],1,"BLW is in Varanasi and was formerly called Diesel Locomotive Works."],
+["Where is the Railway Board located?",["New Delhi","Kolkata","Mumbai","Hajipur"],0,"The Railway Board is located in New Delhi."],
+["Where is the headquarters of Northern Railway?",["Jaipur","New Delhi","Gorakhpur","Prayagraj"],1,"Northern Railway is headquartered in New Delhi."],
+["Where is the headquarters of North Eastern Railway?",["Gorakhpur","Guwahati","Jaipur","Hajipur"],0,"North Eastern Railway is headquartered in Gorakhpur."],
+["Where is the headquarters of Northeast Frontier Railway?",["Shillong","Maligaon, Guwahati","Gorakhpur","Kolkata"],1,"Northeast Frontier Railway is headquartered at Maligaon, Guwahati."],
+["Where is the headquarters of East Coast Railway?",["Bhubaneswar","Visakhapatnam","Hyderabad","Vijayawada"],0,"East Coast Railway is headquartered in Bhubaneswar."],
+["Where is the headquarters of South East Central Railway (SECR)?",["Jabalpur","Bilaspur","Hajipur","Jaipur"],1,"SECR is headquartered in Bilaspur."],
+["Where is the headquarters of West Central Railway (WCR)?",["Bhopal","Jabalpur","Mumbai","Kota"],1,"WCR is headquartered in Jabalpur."],
+["Where is the headquarters of South Western Railway (SWR)?",["Bengaluru","Hubballi","Chennai","Secunderabad"],1,"SWR is headquartered in Hubballi."],
+["Konkan Railway runs through which states?",["Maharashtra, Goa and Karnataka","Gujarat, Maharashtra and Kerala","Goa, Kerala and Tamil Nadu","Maharashtra, Telangana and Andhra Pradesh"],0,"The main Konkan Railway route runs through Maharashtra, Goa and Karnataka."],
+["Which station was formerly known as Mughalsarai?",["Prayagraj Junction","Pandit Deen Dayal Upadhyaya Junction","Kanpur Central","Varanasi City"],1,"Mughalsarai was renamed Pandit Deen Dayal Upadhyaya Junction."],
+["Railway finances were separated from general finances in which year?",["1905","1924","1947","1951"],1,"Traditional railway GK associates the separate railway finance/budget arrangement with 1924."],
+["The Railway Budget was merged with the Union Budget from:",["2014–15","2015–16","2017–18","2019–20"],2,"The merger became effective from 2017–18."],
+["A Divisional Railway Manager (DRM) heads a:",["Railway zone","Division","Production unit","Railway Board"],1,"DRM means Divisional Railway Manager and heads a division."],
+["A railway zone is generally headed by a:",["DRM","General Manager","Station Master","Chief Ticket Inspector"],1,"A railway zone is headed by a General Manager."],
+["What is Kavach?",["A ticketing app","An Automatic Train Protection system","A coach manufacturing unit","A tourist train"],1,"Kavach is India's indigenous Automatic Train Protection system."],
+["What is the main purpose of a Dedicated Freight Corridor?",["Tourism only","Dedicated capacity for freight trains","Metro service","Ticket booking"],1,"DFC provides dedicated rail capacity/corridors for freight movement."],
+["Darjeeling Himalayan Railway is a:",["Broad-gauge main line","Narrow-gauge mountain/heritage railway","Metro railway","Freight corridor"],1,"It is a narrow-gauge mountain heritage railway."],
+["Approximately how far did India's first passenger train travel?",["14 km","34 km","100 km","250 km"],1,"The first passenger train covered about 33–34 km."],
+["On which date did India's first passenger train run?",["15 August 1947","16 April 1853","26 January 1950","1 July 1856"],1,"The standard date is 16 April 1853."],
+["The first passenger train in eastern India ran between:",["Howrah–Hooghly","Delhi–Agra","Mumbai–Pune","Chennai–Bengaluru"],0,"The Howrah–Hooghly passenger service began in 1854."],
+["A terminal station generally means a station:",["Where a line or service ends","Used only for loading freight","Where engines are manufactured","Where tracks change"],0,"A terminal is generally an end point of a railway line or service."],
+["What is a marshalling yard used for?",["Passenger security checks","Sorting and arranging freight wagons/trains","Printing railway tickets","Only cleaning coaches"],1,"A marshalling yard sorts and arranges freight wagons/trains."],
+["What is the width of Metre Gauge?",["1,000 mm","1,435 mm","1,676 mm","762 mm"],0,"Metre Gauge is 1,000 mm wide."],
+["A passenger with RAC status can generally:",["Never travel","Travel subject to railway rules","Travel without a ticket","Travel only in a freight train"],1,"An RAC passenger can travel; berth arrangements depend on railway rules."],
+["IRCTC is mainly associated with:",["Only building railway tracks","Catering, tourism and online ticketing","Railway policing","Building signal towers"],1,"IRCTC provides ticketing, catering and tourism services."],
+["India's first cable-stayed railway bridge is:",["Chenab Bridge","Anji Khad Bridge","Pamban Bridge","Bogibeel Bridge"],1,"Anji Khad Bridge is India's first cable-stayed railway bridge."],
+["Chenab Bridge is approximately how high above the riverbed?",["159 m","259 m","359 m","459 m"],2,"The manual gives the height as 359 metres above the riverbed."],
+["Kolkata Metro began commercial service in:",["1974","1984","1994","2004"],1,"Kolkata Metro began commercial service in 1984."],
+["Vande Bharat Express is best described as:",["A steam-engine train","An indigenous semi-high-speed trainset","A freight-only train","A narrow-gauge heritage train"],1,"Vande Bharat is an Indian semi-high-speed trainset."],
+];
+let cur=0,ans=Array(Q.length).fill(null),rev=Array(Q.length).fill(false),time=30*60;
+function render(){document.getElementById('qnum').textContent=`Question ${cur+1} of ${Q.length}`;document.getElementById('question').textContent=Q[cur][0];document.getElementById('options').innerHTML=Q[cur][1].map((x,i)=>`<label class="opt"><input type="radio" name="o" value="${i}" ${ans[cur]===i?'checked':''} onchange="ans[${cur}]=${i};palette()">${String.fromCharCode(65+i)}. ${x}</label>`).join('');palette()}
+function palette(){document.getElementById('palette').innerHTML=Q.map((_,i)=>`<button class="num ${ans[i]!=null?'answered':''} ${rev[i]?'reviewed':''} ${i===cur?'current':''}" onclick="cur=${i};render()">${i+1}</button>`).join('')}
+function saveNext(){if(cur<Q.length-1){cur++;render()}}function prev(){if(cur>0){cur--;render()}}function clearAns(){ans[cur]=null;render()}function markReview(){rev[cur]=!rev[cur];if(cur<Q.length-1)cur++;render()}
+function submitTest(){if(!confirm('Submit the test now?'))return;clearInterval(tick);let correct=0,wrong=0,attempt=0;Q.forEach((q,i)=>{if(ans[i]!=null){attempt++;if(ans[i]===q[2])correct++;else wrong++}});let score=(correct-wrong/3).toFixed(2),acc=attempt?((correct/attempt)*100).toFixed(1):'0.0';document.getElementById('exam').style.display='none';let html=`<div class="result"><h1>RRB Railway GK Mock Test Result</h1><div class="stats"><div class="stat"><b>${score}</b><br>Score / ${Q.length}</div><div class="stat"><b>${correct}</b><br>Correct</div><div class="stat"><b>${wrong}</b><br>Wrong</div><div class="stat"><b>${Q.length-attempt}</b><br>Unattempted</div><div class="stat"><b>${acc}%</b><br>Accuracy</div></div><h2>Detailed Answer Review</h2>`;Q.forEach((q,i)=>{let ok=ans[i]===q[2];html+=`<div class="reviewItem"><b>Q${i+1}. ${q[0]}</b><br>Your answer: <span class="${ok?'correct':'wrong'}">${ans[i]==null?'Not attempted':q[1][ans[i]]}</span><br>Correct answer: <span class="correct">${q[1][q[2]]}</span><br><small><b>Explanation:</b> ${q[3]}</small></div>`});html+=`<button class="btn primary" onclick="location.reload()">Retake Test</button></div>`;document.getElementById('result').innerHTML=html;document.getElementById('result').style.display='block';scrollTo(0,0)}
+const tick=setInterval(()=>{time--;let m=Math.floor(time/60),s=time%60;document.getElementById('timer').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;if(time<=0){clearInterval(tick);submitTest()}},1000);render();
+</script></body></html>
